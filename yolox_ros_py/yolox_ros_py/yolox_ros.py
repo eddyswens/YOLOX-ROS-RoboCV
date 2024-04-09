@@ -124,12 +124,12 @@ class yolox_ros(yolox_py):
         
         self.bridge = CvBridge()
         
-        self.pub = self.create_publisher(BoundingBoxes,"bounding_boxes", 10)
+        self.pub = self.create_publisher(BoundingBoxes,"yolox/bounding_boxes", 10)
         
         if (self.sensor_qos_mode):
-            self.sub = self.create_subscription(Image,"image_raw",self.imageflow_callback, qos_profile_sensor_data)
+            self.sub = self.create_subscription(Image,"/carla/ego_vehicle/rgb_front/image",self.imageflow_callback, qos_profile_sensor_data)
         else:
-            self.sub = self.create_subscription(Image,"image_raw",self.imageflow_callback, 10)
+            self.sub = self.create_subscription(Image,"/carla/ego_vehicle/rgb_front/image",self.imageflow_callback, 10)
 
     def setting_yolox_exp(self) -> None:
 
